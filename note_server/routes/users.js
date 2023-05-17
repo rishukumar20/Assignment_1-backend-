@@ -13,7 +13,7 @@ router.route('/').options((req,res)=>{
   res.send({err:'hello world'})
 }).get(cors.cors,function (req, res, next) {
   
-  if(user.role = "Admin"){
+  if(user.role = "Superadmin"){
     res.statusCode=200;
    res.setHeader('Content-Type', 'application/json');
     const data = ["Accounts","Settle","Monitor", "Alerts", "Exceptions","Users", "Analysis", "Report"] 
@@ -22,15 +22,32 @@ router.route('/').options((req,res)=>{
   }
   else {
 
-    if(user.role = "Superadmin"){
+    if(user.role = "Admin"){
       res.statusCode=200;
       res.setHeader('Content-Type', 'application/json');
       const data = ["Monitor", "Alerts", "Exceptions","Users", "Analysis", "Report"] 
     
       res.send({data});
     }
+    else {
+      if(user.role = "Manager"){
+    res.statusCode=200;
+   res.setHeader('Content-Type', 'application/json');
+    const data = ["Users", "Analysis", "Report"] 
+  
+    res.send({data});
   }
-
+  else {
+     if(user.role = "Member"){
+    res.statusCode=200;
+   res.setHeader('Content-Type', 'application/json');
+    const data = ["Report"] 
+  
+    res.send({data});
+  }
+  }
+ }
+}
 
 
 
